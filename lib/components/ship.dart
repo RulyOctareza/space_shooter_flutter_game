@@ -1,19 +1,38 @@
 import 'dart:async';
 import 'dart:math';
-
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/rendering.dart';
+import 'package:flutter/animation.dart';
 import 'package:flutter_game_1/components/bullets.dart';
+import 'package:flutter_game_1/components/explosion.dart';
 
-class Ship extends SpriteComponent with HasGameRef {
+class Ship extends SpriteComponent with HasGameRef, CollisionCallbacks {
   late Vector2 tujuan;
   late Vector2 arah;
   double speed = 2.0;
   double shootCooldown = 10;
   double shootTimer = 0;
 
+  double hitTimer = 0;
+  double hitCooldown = 20;
   bool isShooting = false;
+  bool isBeingHit = false;
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if ((isBeingHit == false) && (other is! Bullets)) {
+      isBeingHit = true;
+      decorator.addLast(PaintDecorator.tint(Color.fromARGB(155, 120, 204, 37)));
+      decorator.addLast(PaintDecorator.blur(10));
+
+      game.add(Explosion(intersectionPoints.first, Vector2(0.7, 0.7)));
+    }
+
+    super.onCollision(intersectionPoints, other);
+  }
 
   Ship() {
     arah = Vector2(0, 0);
@@ -37,6 +56,7 @@ class Ship extends SpriteComponent with HasGameRef {
     game.add(bBaru);
 
     isShooting = true;
+
     lookAt(info.eventPosition.global);
     angle += pi;
   }
@@ -47,6 +67,12 @@ class Ship extends SpriteComponent with HasGameRef {
     position = Vector2(100, 100);
     angle = -pi / 2;
     anchor = Anchor.center;
+    add(
+      CircleHitbox(
+        radius: sprite!.image.width / 2,
+        collisionType: CollisionType.active,
+      ),
+    );
   }
 
   @override
@@ -56,6 +82,16 @@ class Ship extends SpriteComponent with HasGameRef {
       if (shootTimer > shootCooldown) {
         shootTimer = 0;
         isShooting = false;
+      }
+    }
+
+    if (isBeingHit) {
+      hitTimer++;
+      if (hitTimer > hitCooldown) {
+        hitTimer = 0;
+        isBeingHit = false;
+        decorator.removeLast();
+        decorator.removeLast();
       }
     }
 
