@@ -24,6 +24,11 @@ class ScoreText extends PositionComponent with HasGameRef {
     return super.onLoad();
   }
 
+  void reset(GameData data) {
+    this.data = data;
+    scoreText.text = 'Score: ${data.score}';
+  }
+
   @override
   void update(double dt) {
     scoreText.text = 'Score: ${data.score}';

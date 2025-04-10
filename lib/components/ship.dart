@@ -5,11 +5,14 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/rendering.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter_game_1/components/bullets.dart';
 import 'package:flutter_game_1/components/explosion.dart';
+import 'package:flutter_game_1/pages/my_flame_game.dart';
 
-class Ship extends SpriteComponent with HasGameRef, CollisionCallbacks {
+class Ship extends SpriteComponent
+    with HasGameRef<MyFlameGame>, CollisionCallbacks {
   late Vector2 tujuan;
   late Vector2 arah;
   double speed = 2.0;
@@ -27,8 +30,11 @@ class Ship extends SpriteComponent with HasGameRef, CollisionCallbacks {
       isBeingHit = true;
       decorator.addLast(PaintDecorator.tint(Color.fromARGB(155, 120, 204, 37)));
       decorator.addLast(PaintDecorator.blur(10));
+      game.loselife();
 
       game.add(Explosion(intersectionPoints.first, Vector2(0.7, 0.7)));
+
+      FlameAudio.play("assets/audio/EXPLDsgn_Explosion Impact_14.wav");
     }
 
     super.onCollision(intersectionPoints, other);

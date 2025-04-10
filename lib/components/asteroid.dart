@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter_game_1/components/blast_particle.dart';
 import 'package:flutter_game_1/components/bullets.dart';
 import 'package:flutter_game_1/components/ship.dart';
@@ -24,6 +25,7 @@ class Asteroid extends SpriteComponent
       game.add(BlastParticle(position, ukuran));
       game.addScore(10);
       removeFromParent();
+      FlameAudio.play("assets/audio/EXPLDsgn_Implode_15.wav");
     }
     // print('terjadi tubrukan !');
     super.onCollision(intersectionPoints, other);

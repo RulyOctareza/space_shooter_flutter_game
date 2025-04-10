@@ -6,6 +6,7 @@ import 'package:flutter_game_1/components/asteroid_spawner.dart';
 import 'package:flutter_game_1/components/bg_parallax_component.dart';
 import 'package:flutter_game_1/components/ship.dart';
 import 'package:flutter_game_1/ui/game_data.dart';
+import 'package:flutter_game_1/ui/lives_ui.dart';
 import 'package:flutter_game_1/ui/score_text.dart';
 
 class MyFlameGame extends FlameGame
@@ -15,6 +16,15 @@ class MyFlameGame extends FlameGame
   late AsteroidSpawner asp;
   late GameData data;
   late ScoreText scoreText;
+  late LivesUi livesUi;
+
+  void reset() {
+    resumeEngine();
+    overlays.remove('GameOver');
+    data = GameData(0, 3);
+    livesUi.reset(data);
+    scoreText.reset(data);
+  }
 
   void addScore(int score) {
     data.addScore(score);
@@ -39,12 +49,27 @@ class MyFlameGame extends FlameGame
 
     scoreText = ScoreText(data);
     add(scoreText);
+
+    livesUi = LivesUi(data);
+    add(livesUi);
+
+    pauseEngine();
   }
 
   @override
   void update(double dt) {
     bgParallax.changeSpeedBasedShip(s);
     super.update(dt);
+  }
+
+  void loselife() {
+    data.loselives();
+    livesUi.loselives();
+    if (data.lives <= 0) {
+      //game over
+      overlays.add('GameOver');
+      pauseEngine();
+    }
   }
 
   @override
