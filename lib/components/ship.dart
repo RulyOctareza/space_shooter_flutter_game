@@ -69,7 +69,7 @@ class Ship extends SpriteComponent
 
   @override
   FutureOr<void> onLoad() async {
-    sprite = Sprite(await Flame.images.load('ships/spaceShips_001.png'));
+    sprite = Sprite(await Flame.images.load('ships/spaceShips_009.png'));
     position = Vector2(100, 100);
     angle = -pi / 2;
     anchor = Anchor.center;

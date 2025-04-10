@@ -20,7 +20,7 @@ class StartMenuOverlays extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          color: Color.fromARGB(255, 14, 210, 73),
+          color: Color.fromARGB(255, 19, 42, 86),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,7 +30,7 @@ class StartMenuOverlays extends StatelessWidget {
                 style: TextStyle(fontSize: 50, color: Colors.white),
               ),
               SizedBox(height: 15),
-              Image.asset('assets/images/ships/spaceShips_001.png'),
+              Image.asset('assets/images/ships/spaceShips_009.png'),
               SizedBox(height: 15),
               ElevatedButton(
                 onPressed: onPressed,
