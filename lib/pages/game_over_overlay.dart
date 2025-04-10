@@ -41,6 +41,7 @@ class GameOverOverlay extends StatelessWidget {
   }
 
   void onPressed() {
+  
     game.reset();
   }
 }

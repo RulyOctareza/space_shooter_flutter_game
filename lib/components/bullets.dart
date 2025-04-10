@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter_game_1/components/asteroid.dart';
 
 class Bullets extends SpriteComponent with HasGameRef, CollisionCallbacks {
@@ -33,6 +34,7 @@ class Bullets extends SpriteComponent with HasGameRef, CollisionCallbacks {
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
     if (other is Asteroid) {
+      FlameAudio.play('GUNArtl_Grenade Launcher Fire_05.wav');
       removeFromParent();
     }
   }

@@ -15,7 +15,7 @@ class Ship extends SpriteComponent
     with HasGameRef<MyFlameGame>, CollisionCallbacks {
   late Vector2 tujuan;
   late Vector2 arah;
-  double speed = 2.0;
+  double speed = 3.0;
   double shootCooldown = 10;
   double shootTimer = 0;
 
@@ -34,7 +34,7 @@ class Ship extends SpriteComponent
 
       game.add(Explosion(intersectionPoints.first, Vector2(0.7, 0.7)));
 
-      FlameAudio.play("assets/audio/EXPLDsgn_Explosion Impact_14.wav");
+      FlameAudio.play("EXPLDsgn_Explosion Impact_14.wav");
     }
 
     super.onCollision(intersectionPoints, other);

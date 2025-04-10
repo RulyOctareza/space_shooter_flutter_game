@@ -25,7 +25,7 @@ class Asteroid extends SpriteComponent
       game.add(BlastParticle(position, ukuran));
       game.addScore(10);
       removeFromParent();
-      FlameAudio.play("assets/audio/EXPLDsgn_Implode_15.wav");
+      FlameAudio.play("EXPLDsgn_Implode_15.wav");
     }
     // print('terjadi tubrukan !');
     super.onCollision(intersectionPoints, other);

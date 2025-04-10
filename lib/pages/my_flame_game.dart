@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game_1/components/asteroid_spawner.dart';
 import 'package:flutter_game_1/components/bg_parallax_component.dart';
@@ -24,6 +25,7 @@ class MyFlameGame extends FlameGame
     data = GameData(0, 3);
     livesUi.reset(data);
     scoreText.reset(data);
+    FlameAudio.bgm.play("Looping Ascent - Joel Cummins.mp3");
   }
 
   void addScore(int score) {
@@ -66,6 +68,7 @@ class MyFlameGame extends FlameGame
     data.loselives();
     livesUi.loselives();
     if (data.lives <= 0) {
+      FlameAudio.bgm.stop();
       //game over
       overlays.add('GameOver');
       pauseEngine();

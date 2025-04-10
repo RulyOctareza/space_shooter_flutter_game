@@ -49,6 +49,6 @@ class StartMenuOverlays extends StatelessWidget {
   void onPressed() {
     game.resumeEngine();
     game.overlays.remove('StartMenu');
-    FlameAudio.bgm.play("assets/audio/Looping Ascent - Joel Cummins.mp3");
+    FlameAudio.bgm.play("Looping Ascent - Joel Cummins.mp3", volume: 0.4);
   }
 }
