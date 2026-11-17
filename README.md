@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/preview/hero.png" alt="Space Shooter — ilustrasi game tembak-menembak luar angkasa" width="100%">
+  <img src="docs/preview/hero.svg" alt="Space Shooter — ilustrasi game tembak-menembak luar angkasa" width="100%">
 </p>
 
 <h1 align="center">Space Shooter</h1>
